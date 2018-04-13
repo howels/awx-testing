@@ -14,7 +14,7 @@ hostname = os.environ['HOSTNAME']
 port = 22
 username = os.environ['USERNAME']
 password = os.environ['PASSWORD']
-command = "cat /var/dhcp.leases | awk '{print $4, $3}'"
+command = "cat /var/dhcp.leases | awk '{print $4, $3, $2}'"
 username = 'username'
 password = 'password'
 hostname = 'hostname'
@@ -68,10 +68,11 @@ for server in server_list:
     #print server
     if server[0] == '*':
         servers['idrac']['hosts'].append(server[1])
+        servers['_meta']['hostvars'][server[0]] = {'mac': server[2]}
     else:
         servers['idrac']['hosts'].append(server[0])
         #servers['_meta']['hostvars'].append(server[0])
-        servers['_meta']['hostvars'][server[0]] = {'ansible_host': server[1]}
+        servers['_meta']['hostvars'][server[0]] = {'ansible_host': server[1],'mac': server[2]}
 
 if args.list:
     print(servers)
