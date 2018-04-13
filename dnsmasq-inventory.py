@@ -10,14 +10,14 @@ parser.add_argument('-c', '--count', action='store_true', required=False, dest='
 parser.add_argument('--list', action='store_true', required=False, dest='list')
 args = parser.parse_args()
 
-hostname = os.environ['HOSTNAME']
+hostname = os.environ['DNSMASQ_HOSTNAME']
 port = 22
-username = os.environ['USERNAME']
-password = os.environ['PASSWORD']
+username = os.environ['DNSMASQ_USERNAME']
+password = os.environ['DNSMASQ_PASSWORD']
 command = "cat /var/dhcp.leases | awk '{print $4, $3, $2}'"
-username = 'username'
-password = 'password'
-hostname = 'hostname'
+#username = 'username'
+#password = 'password'
+#hostname = 'hostname'
 
 try:
     client = paramiko.SSHClient()
